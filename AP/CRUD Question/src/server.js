@@ -6,7 +6,6 @@ const app = express();
 
 app.use(express.json());
 
-// Create Post
 app.post("/posts", async (req, res) => {
     try {
         const { title, content } = req.body;
@@ -31,7 +30,6 @@ app.post("/posts", async (req, res) => {
     }
 });
 
-// Read All Posts with filtering, pagination, and sorting
 app.get("/posts", async (req, res) => {
     try {
         let { published, skip = 0, take = 10, fromDate, toDate, sortBy = "createdAt", order = "desc" } = req.query;
@@ -69,7 +67,6 @@ app.get("/posts", async (req, res) => {
     }
 });
 
-// Read Single Post
 app.get("/posts/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -90,7 +87,6 @@ app.get("/posts/:id", async (req, res) => {
     }
 });
 
-// Update Post
 app.put("/posts/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -134,7 +130,6 @@ app.put("/posts/:id", async (req, res) => {
     }
 });
 
-// Delete Post (soft delete)
 app.delete("/posts/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -159,3 +154,6 @@ app.delete("/posts/:id", async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+module.exports = app;
+
